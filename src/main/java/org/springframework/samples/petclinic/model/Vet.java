@@ -15,6 +15,8 @@
  */
 package org.springframework.samples.petclinic.model;
 
+import javax.persistence.OneToMany;
+import javax.persistence.CascadeType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -73,6 +75,35 @@ public class Vet extends Person {
 
     public void addSpecialty(Specialty specialty) {
         getSpecialtiesInternal().add(specialty);
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vet")
+    private Set<Memo> memos;
+
+    protected Set<Memo> getMemosInternal() {
+        if (this.memos == null) {
+            this.memos = new HashSet<>();
+        }
+        return this.memos;
+    }
+
+    protected void setMemosInternal(Set<Memo> memos) {
+        this.memos = memos;
+    }
+
+    public List<Memo> getMemos() {
+        List<Memo> sortedMemos = new ArrayList<>(getMemosInternal());
+        PropertyComparator.sort(sortedMemos, new MutableSortDefinition("date", true, true));
+        return Collections.unmodifiableList(sortedMemos);
+    }
+
+    public void addMemo(Memo memo) {
+        getMemosInternal().add(memo);
+        memo.setVet(this);
+    }
+
+    public int getNrOfMemos() {
+        return getMemosInternal().size();
     }
 
 }
