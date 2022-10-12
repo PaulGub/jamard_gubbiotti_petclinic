@@ -100,14 +100,27 @@ INSERT INTO visits
 VALUES (default, 7, '2013-01-04', 'spayed');
 
 INSERT INTO memos
-VALUES (1, 1, '2018-10-07', 'planifier operations');
+VALUES (1, 1, '2018-10-07', 'plan operations');
 INSERT INTO memos
-VALUES (2, 1, '2018-10-09', 'organiser visites');
+VALUES (2, 1, '2018-10-09', 'organize visits');
 INSERT INTO memos
-VALUES (3, 1, '2018-10-09', 'contacter labo');
+VALUES (3, 1, '2018-10-09', 'contact lab');
 INSERT INTO memos
-VALUES (4, 3, '2018-10-05', 'planifier réunion');
+VALUES (4, 3, '2018-10-05', 'plan meeting');
 INSERT INTO memos
-VALUES (5, 3, '2018-10-07', 'prévoir congés');
+VALUES (5, 3, '2018-10-07', 'provide time off');
 INSERT INTO memos
-VALUES (6, 3, '2018-10-07', 'commander matériel');
+VALUES (6, 3, '2018-10-07', 'order material');
+
+INSERT INTO operations
+VALUES (default, 1, 2, 'tumor removal', '2022-08-01');
+INSERT INTO operations
+VALUES (default, 1, 4, 'hind leg fracture', '2022-09-07');
+INSERT INTO operations
+VALUES (default, 1, 5, 'pulling teeth', '2022-10-07');
+INSERT INTO operations
+VALUES (default, 3, 1, 'removal of testicles', '2022-07-07');
+INSERT INTO operations
+VALUES (default, 3, 3, 'corneal graft', '2022-08-07');
+INSERT INTO operations
+VALUES (default, 3, 6, 'removal of testicles', '2022-09-30');
