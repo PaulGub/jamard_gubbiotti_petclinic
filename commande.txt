@@ -1,1 +1,3 @@
 ./mvnw.cmd jetty:run-war -DskipTests
+
+./mvnw.cmd jetty:run-war -DskipTests -P MySQL
