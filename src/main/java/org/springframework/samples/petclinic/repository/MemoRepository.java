@@ -16,7 +16,7 @@ public interface MemoRepository {
     void save(Memo memo) throws DataAccessException;
 
     /**
-     * Retrieves a list of <code>Memo</code> associated to a vet * * @param vetId the <code>Vet</code> identifier * @return List of of <code>Memo</code>
+     * Retrieves a list of <code>Memo</code> associated to a vet * * @param vetId the <code>Vet</code> identifier * @return List  of <code>Memo</code>
      */
     List<Memo> findByVetId(Integer vetId);
 }
