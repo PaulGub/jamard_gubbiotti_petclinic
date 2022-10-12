@@ -51,3 +51,18 @@ INSERT IGNORE INTO visits VALUES (1, 7, '2010-03-04', 'rabies shot');
 INSERT IGNORE INTO visits VALUES (2, 8, '2011-03-04', 'rabies shot');
 INSERT IGNORE INTO visits VALUES (3, 8, '2009-06-04', 'neutered');
 INSERT IGNORE INTO visits VALUES (4, 7, '2008-09-04', 'spayed');
+
+INSERT IGNORE INTO memos VALUES (1, 1, '2018-10-07', 'plan operations');
+INSERT IGNORE INTO memos VALUES (2, 1, '2018-10-09', 'organize visits');
+INSERT IGNORE INTO memos VALUES (3, 1, '2018-10-09', 'contact lab');
+INSERT IGNORE INTO memos VALUES (4, 3, '2018-10-05', 'plan meeting');
+INSERT IGNORE INTO memos VALUES (5, 3, '2018-10-07', 'provide time off');
+INSERT IGNORE INTO memos VALUES (6, 3, '2018-10-07', 'order material');
+
+INSERT IGNORE INTO operations VALUES (1, 1, 2, 'tumor removal', '2022-08-01');
+INSERT IGNORE INTO operations VALUES (2, 1, 4, 'hind leg fracture', '2022-09-07');
+INSERT IGNORE INTO operations VALUES (3, 1, 5, 'pulling teeth', '2022-10-07');
+INSERT IGNORE INTO operations VALUES (4, 3, 1, 'removal of testicles', '2022-07-07');
+INSERT IGNORE INTO operations VALUES (5, 3, 3, 'corneal graft', '2022-08-07');
+INSERT IGNORE INTO operations VALUES (6, 3, 6, 'removal of testicles', '2022-09-30');
+
