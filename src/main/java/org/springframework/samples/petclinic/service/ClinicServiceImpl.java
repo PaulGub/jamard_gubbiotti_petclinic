@@ -19,15 +19,8 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.samples.petclinic.model.Owner;
-import org.springframework.samples.petclinic.model.Pet;
-import org.springframework.samples.petclinic.model.PetType;
-import org.springframework.samples.petclinic.model.Vet;
-import org.springframework.samples.petclinic.model.Visit;
-import org.springframework.samples.petclinic.repository.OwnerRepository;
-import org.springframework.samples.petclinic.repository.PetRepository;
-import org.springframework.samples.petclinic.repository.VetRepository;
-import org.springframework.samples.petclinic.repository.VisitRepository;
+import org.springframework.samples.petclinic.model.*;
+import org.springframework.samples.petclinic.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,12 +38,18 @@ public class ClinicServiceImpl implements ClinicService {
     private OwnerRepository ownerRepository;
     private VisitRepository visitRepository;
 
+    private MemoRepository memoRepository;
+
+    private OperationRepository operationRepository;
+
     @Autowired
-    public ClinicServiceImpl(PetRepository petRepository, VetRepository vetRepository, OwnerRepository ownerRepository, VisitRepository visitRepository) {
+    public ClinicServiceImpl(PetRepository petRepository, VetRepository vetRepository, OwnerRepository ownerRepository, VisitRepository visitRepository, MemoRepository memoRepository, OperationRepository operationRepository) {
         this.petRepository = petRepository;
         this.vetRepository = vetRepository;
         this.ownerRepository = ownerRepository;
         this.visitRepository = visitRepository;
+        this.memoRepository = memoRepository;
+        this.operationRepository = operationRepository;
     }
 
     @Override
@@ -108,6 +107,18 @@ public class ClinicServiceImpl implements ClinicService {
 	public Collection<Visit> findVisitsByPetId(int petId) {
 		return visitRepository.findByPetId(petId);
 	}
+
+    @Override
+    @Transactional
+    public void saveMemo(Memo memo) {
+        memoRepository.save(memo);
+    }
+
+    @Override
+    @Transactional
+    public void saveOperation(Operation operation) {
+        operationRepository.save(operation);
+    }
 
 
 }
