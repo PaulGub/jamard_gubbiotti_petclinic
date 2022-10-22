@@ -1,6 +1,6 @@
 package org.springframework.samples.petclinic.repository;
 
-import jdk.dynalink.Operation;
+import org.springframework.samples.petclinic.model.Operation;
 import org.springframework.dao.DataAccessException;
 
 import java.util.List;
