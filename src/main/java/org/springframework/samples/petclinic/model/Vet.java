@@ -80,6 +80,9 @@ public class Vet extends Person {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vet")
     private Set<Memo> memos;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vet")
+    private Set<Operation> operations;
+
     protected Set<Memo> getMemosInternal() {
         if (this.memos == null) {
             this.memos = new HashSet<>();
@@ -104,6 +107,32 @@ public class Vet extends Person {
 
     public int getNrOfMemos() {
         return getMemosInternal().size();
+    }
+
+    protected Set<Operation> getOperationsInternal() {
+        if (this.operations == null) {
+            this.operations = new HashSet<>();
+        }
+        return this.operations;
+    }
+
+    protected void setOperationsInternal(Set<Operation> operations) {
+        this.operations = operations;
+    }
+
+    public List<Operation> getOperations() {
+        List<Operation> sortedOperations = new ArrayList<>(getOperationsInternal());
+        PropertyComparator.sort(sortedOperations, new MutableSortDefinition("date", true, true));
+        return Collections.unmodifiableList(sortedOperations);
+    }
+
+    public void addOperation(Operation operation) {
+        getOperationsInternal().add(operation);
+        operation.setVet(this);
+    }
+
+    public int getNrOfOperations() {
+        return getOperationsInternal().size();
     }
 
 }
