@@ -33,7 +33,11 @@ public interface ClinicService {
 
     Pet findPetById(int id);
 
+    Vet findVetById(int id);
+
     void savePet(Pet pet);
+
+    void saveVet(Vet vet);
 
     void saveVisit(Visit visit);
 
@@ -47,6 +51,6 @@ public interface ClinicService {
 
     void saveMemo(Memo memo);
 
-   void saveOperation(Operation operation);
+    void saveOperation(Operation operation);
 
 }

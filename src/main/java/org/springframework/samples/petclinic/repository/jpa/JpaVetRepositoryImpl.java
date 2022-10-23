@@ -45,4 +45,18 @@ public class JpaVetRepositoryImpl implements VetRepository {
         return this.em.createQuery("SELECT distinct vet FROM Vet vet left join fetch vet.specialties ORDER BY vet.lastName, vet.firstName").getResultList();
     }
 
+    @Override
+    public Vet findById(int id) {
+        return this.em.find(Vet.class, id);
+    }
+
+    @Override
+    public void save(Vet vet) {
+        if (vet.getId() == null) {
+            this.em.persist(vet);
+        } else {
+            this.em.merge(vet);
+        }
+    }
+
 }

@@ -17,6 +17,7 @@ package org.springframework.samples.petclinic.repository;
 
 import java.util.Collection;
 
+import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.model.Vet;
 
 /**
@@ -37,5 +38,20 @@ public interface VetRepository {
      */
     Collection<Vet> findAll();
 
+    /**
+     * Retrieve a <code>Vet</code> from the data store by id.
+     *
+     * @param id the id to search for
+     * @return the <code>Vet</code> if found
+     * @throws org.springframework.dao.DataRetrievalFailureException if not found
+     */
+    Vet findById(int id);
 
+    /**
+     * Save a <code>Vet</code> to the data store, either inserting or updating it.
+     *
+     * @param vet the <code>Vet</code> to save
+     * @see BaseEntity#isNew
+     */
+    void save(Vet vet);
 }

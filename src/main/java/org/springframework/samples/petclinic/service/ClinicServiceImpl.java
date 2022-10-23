@@ -20,7 +20,12 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.samples.petclinic.model.*;
-import org.springframework.samples.petclinic.repository.*;
+import org.springframework.samples.petclinic.repository.OwnerRepository;
+import org.springframework.samples.petclinic.repository.PetRepository;
+import org.springframework.samples.petclinic.repository.VetRepository;
+import org.springframework.samples.petclinic.repository.VisitRepository;
+import org.springframework.samples.petclinic.repository.MemoRepository;
+import org.springframework.samples.petclinic.repository.OperationRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -91,9 +96,21 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Vet findVetById(int id) {
+        return vetRepository.findById(id);
+    }
+
+    @Override
     @Transactional
     public void savePet(Pet pet) {
         petRepository.save(pet);
+    }
+
+    @Override
+    @Transactional
+    public void saveVet(Vet vet) {
+        vetRepository.save(vet);
     }
 
     @Override
@@ -119,6 +136,4 @@ public class ClinicServiceImpl implements ClinicService {
     public void saveOperation(Operation operation) {
         operationRepository.save(operation);
     }
-
-
 }

@@ -22,11 +22,7 @@ import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Owner;
-import org.springframework.samples.petclinic.model.Pet;
-import org.springframework.samples.petclinic.model.PetType;
-import org.springframework.samples.petclinic.model.Vet;
-import org.springframework.samples.petclinic.model.Visit;
+import org.springframework.samples.petclinic.model.*;
 import org.springframework.samples.petclinic.util.EntityUtils;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
@@ -199,5 +195,38 @@ abstract class AbstractClinicServiceTests {
         assertThat(visitArr[0].getPet().getId()).isEqualTo(7);
     }
 
+    @Test
+    @Transactional
+    public void shouldAddNewMemoForVet() {
+        Vet vet6 = this.clinicService.findVetById(6);
+        int found = vet6.getNrOfMemos();
+        Memo memo = new Memo();
+        vet6.addMemo(memo);
+        memo.setDescription("test");
+        this.clinicService.saveMemo(memo);
+        this.clinicService.saveVet(vet6);
 
+        assertThat(vet6.getNrOfMemos()).isEqualTo(found + 1);
+        assertThat(memo.getId()).isNotNull();
+    }
+
+    @Test
+    @Transactional
+    public void shouldAddNewOperationForPetAndVet() {
+        Pet pet7 = this.clinicService.findPetById(7);
+        int petOperationFound = pet7.getOperations().size();
+        Vet vet6 = this.clinicService.findVetById(6);
+        int vetOperationFound = vet6.getNrOfOperations();
+        Operation operation = new Operation();
+        pet7.addOperation(operation);
+        vet6.addOperation(operation);
+        operation.setDescription("boulard");
+        this.clinicService.saveOperation(operation);
+        this.clinicService.savePet(pet7);
+        this.clinicService.saveVet(vet6);
+
+        assertThat(pet7.getOperations().size()).isEqualTo(petOperationFound + 1);
+        assertThat(vet6.getNrOfOperations()).isEqualTo(vetOperationFound + 1);
+        assertThat(operation.getId()).isNotNull();
+    }
 }
