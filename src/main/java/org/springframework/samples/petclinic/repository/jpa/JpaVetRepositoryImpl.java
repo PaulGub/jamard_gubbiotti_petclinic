@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.Collection;
 
 /**
@@ -47,7 +48,9 @@ public class JpaVetRepositoryImpl implements VetRepository {
 
     @Override
     public Vet findById(int id) {
-        return this.em.find(Vet.class, id);
+        Query query = this.em.createQuery("SELECT vet FROM Vet vet left join fetch vet.memos left join fetch vet.operations WHERE vet.id =:id");
+        query.setParameter("id", id);
+        return (Vet) query.getSingleResult();
     }
 
     @Override

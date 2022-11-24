@@ -77,10 +77,10 @@ public class Vet extends Person {
         getSpecialtiesInternal().add(specialty);
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vet")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vet", fetch = FetchType.EAGER)
     private Set<Memo> memos;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vet")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vet", fetch = FetchType.EAGER)
     private Set<Operation> operations;
 
     protected Set<Memo> getMemosInternal() {

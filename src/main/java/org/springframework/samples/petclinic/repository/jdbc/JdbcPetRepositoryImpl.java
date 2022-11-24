@@ -15,15 +15,14 @@
  */
 package org.springframework.samples.petclinic.repository.jdbc;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -47,6 +46,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class JdbcPetRepositoryImpl implements PetRepository {
 
+    private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private SimpleJdbcInsert insertPet;
@@ -54,7 +54,7 @@ public class JdbcPetRepositoryImpl implements PetRepository {
     private OwnerRepository ownerRepository;
 
     @Autowired
-    public JdbcPetRepositoryImpl(DataSource dataSource, OwnerRepository ownerRepository) {
+    public JdbcPetRepositoryImpl(DataSource dataSource, OwnerRepository ownerRepository, JdbcTemplate jdbcTemplate) {
         this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 
         this.insertPet = new SimpleJdbcInsert(dataSource)
@@ -62,6 +62,19 @@ public class JdbcPetRepositoryImpl implements PetRepository {
             .usingGeneratedKeyColumns("id");
 
         this.ownerRepository = ownerRepository;
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public Collection<Pet> findAll() {
+        List<Pet> pets = new ArrayList<>();
+        //Get the list of all pets.
+        pets.addAll(this.jdbcTemplate.query(
+            "SELECT id, name, birth_date FROM pets ORDER BY name",
+            BeanPropertyRowMapper.newInstance(Pet.class)
+        ));
+
+        return pets;
     }
 
     @Override

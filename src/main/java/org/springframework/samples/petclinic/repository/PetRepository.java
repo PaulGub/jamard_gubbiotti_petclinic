@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.repository;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.samples.petclinic.model.BaseEntity;
@@ -31,6 +32,13 @@ import org.springframework.samples.petclinic.model.PetType;
  * @author Michael Isvy
  */
 public interface PetRepository {
+
+    /**
+     * Retrieve all <code>Pet</code>s from the data store.
+     *
+     * @return a <code>Collection</code> of <code>Pet</code>s
+     */
+    Collection<Pet> findAll();
 
     /**
      * Retrieve all <code>PetType</code>s from the data store.

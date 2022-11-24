@@ -43,6 +43,8 @@ public interface ClinicService {
 
     Collection<Vet> findVets();
 
+    Collection<Pet> findPets();
+
     void saveOwner(Owner owner);
 
     Collection<Owner> findOwnerByLastName(String lastName);

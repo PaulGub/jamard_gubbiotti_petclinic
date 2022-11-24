@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.repository.jpa;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -39,6 +40,12 @@ public class JpaPetRepositoryImpl implements PetRepository {
 
     @PersistenceContext
     private EntityManager em;
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public Collection<Pet> findAll() {
+        return this.em.createQuery("SELECT distinct pet FROM Pet pet left join fetch pet.owner ORDER BY pet.name").getResultList();
+    }
 
     @Override
     @SuppressWarnings("unchecked")

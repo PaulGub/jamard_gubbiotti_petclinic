@@ -120,6 +120,12 @@ public class ClinicServiceImpl implements ClinicService {
         return vetRepository.findAll();
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Collection<Pet> findPets() {
+        return petRepository.findAll();
+    }
+
 	@Override
 	public Collection<Visit> findVisitsByPetId(int petId) {
 		return visitRepository.findByPetId(petId);

@@ -5,8 +5,21 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<petclinic:layout pageName="vets">
-    <h2 id="veterinarians">Veterinarians</h2>
+<petclinic:layout pageName="vetsOperationList">
+
+    <h2>Pet Information</h2>
+    <table class="table table-striped" aria-describedby="petInformation">
+        <tr>
+            <th id="name">Name</th>
+            <td headers="name"><strong><c:out value="${pet.name}"/></strong></td>
+        </tr>
+        <tr>
+            <th id="birthDate">Birth Date</th>
+            <td headers="birthDate"><c:out value="${pet.birthDate}"/></td>
+        </tr>
+    </table>
+
+    <h2 id="veterinarians">Select a Veterinarian</h2>
 
     <div class="row">
         <table id="vetsTable" class="table table-striped" aria-describedby="veterinarians">
@@ -20,10 +33,10 @@
             <c:forEach items="${vets.vetList}" var="vet">
                 <tr>
                     <td>
-                        <spring:url value="/vets/{vetId}" var="vetUrl">
+                        <spring:url value="{vetId}/new.html" var="addOperationForm">
                             <spring:param name="vetId" value="${vet.id}"/>
                         </spring:url>
-                        <a href="${fn:escapeXml(vetUrl)}">
+                        <a href="${fn:escapeXml(addOperationForm)}">
                             <c:out value="${vet.firstName} ${vet.lastName}"/>
                         </a>
                     </td>
@@ -37,14 +50,5 @@
             </c:forEach>
             </tbody>
         </table>
-    </div>
-
-    <div class="row">
-        <div class="col-md-2">
-            <a href="<spring:url value="/vets.xml" htmlEscape="true" />">View as XML</a>
-        </div>
-        <div class="col-md-2">
-            <a href="<spring:url value="/vets.json" htmlEscape="true" />">View as JSON</a>
-        </div>
     </div>
 </petclinic:layout>
