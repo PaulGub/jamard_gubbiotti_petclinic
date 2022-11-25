@@ -43,7 +43,7 @@ public class OperationController {
         dataBinder.setValidator(new OperationValidator());
     }
 
-    @GetMapping("/operation")
+    @GetMapping("/create-operation")
     public ModelAndView showVetsOperationList(@PathVariable("petId") int petId) {
         ModelAndView mav = new ModelAndView("operations/vetsOperationList");
         mav.addObject(this.clinicService.findPetById(petId));
@@ -58,7 +58,7 @@ public class OperationController {
         return vets;
     }
 
-    @GetMapping(value = "/operation/{vetId}/new.html")
+    @GetMapping(value = "/create-operation/vets/{vetId}/new.html")
     public String initCreationForm(@PathVariable("vetId") int vetId, Pet pet, ModelMap modelMap) {
         Operation operation = new Operation();
         Vet vet = this.clinicService.findVetById(vetId);
@@ -68,7 +68,7 @@ public class OperationController {
         return VIEWS_OPERATIONS_CREATE_OR_UPDATE_FORM;
     }
 
-    @PostMapping(value = "/operation/{vetId}/new.html")
+    @PostMapping(value = "/create-operation/vets/{vetId}/new.html")
     public String processCreationForm(@PathVariable("vetId") int vetId, Pet pet, @Valid Operation operation, BindingResult bindingResult, ModelMap modelMap) {
         if (bindingResult.hasErrors()) {
             modelMap.put("operation", operation);

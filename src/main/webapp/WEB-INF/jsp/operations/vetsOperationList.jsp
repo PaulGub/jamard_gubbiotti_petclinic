@@ -33,7 +33,7 @@
             <c:forEach items="${vets.vetList}" var="vet">
                 <tr>
                     <td>
-                        <spring:url value="{vetId}/new.html" var="addOperationForm">
+                        <spring:url value="vets/{vetId}/new.html" var="addOperationForm">
                             <spring:param name="vetId" value="${vet.id}"/>
                         </spring:url>
                         <a href="${fn:escapeXml(addOperationForm)}">

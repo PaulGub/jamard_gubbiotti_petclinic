@@ -16,7 +16,7 @@
             <td headers="birthDate"><c:out value="${pet.birthDate}"/></td>
         </tr>
     </table>
-    <spring:url value="{petId}/operation/" var="addOperationUrl">
+    <spring:url value="{petId}/create-operation/" var="addOperationUrl">
         <spring:param name="petId" value="${pet.id}"/>
     </spring:url>
     <a href="${fn:escapeXml(addOperationUrl)}" class="btn btn-default">Add New Operation</a>
