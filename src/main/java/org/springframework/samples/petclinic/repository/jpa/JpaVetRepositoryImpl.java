@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.repository.jpa;
 
+import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.repository.VetRepository;
 import org.springframework.stereotype.Repository;
@@ -48,9 +49,7 @@ public class JpaVetRepositoryImpl implements VetRepository {
 
     @Override
     public Vet findById(int id) {
-        Query query = this.em.createQuery("SELECT vet FROM Vet vet left join fetch vet.memos left join fetch vet.operations WHERE vet.id =:id");
-        query.setParameter("id", id);
-        return (Vet) query.getSingleResult();
+        return this.em.find(Vet.class, id);
     }
 
     @Override

@@ -43,4 +43,33 @@
             </td>
         </tr>
     </table>
+    <br/>
+    <br/>
+    <br/>
+    <h2>Operations</h2>
+    <table class="table table-striped">
+
+        <tr>
+
+            <td valign="top">
+                <table class="table-condensed">
+                    <thead>
+                    <tr>
+                        <th>Operation Date</th>
+                        <th>Description</th>
+                        <th>Pet Name</th>
+                    </tr>
+                    </thead>
+                    <c:forEach var="operation" items="${vet.operations}">
+                        <tr>
+                            <td><petclinic:localDate date="${operation.date}"
+                                                     pattern="yyyy-MM-dd"/></td>
+                            <td><c:out value="${operation.description}"/></td>
+                            <td><c:out value="${operation.pet.name}"/></td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </td>
+        </tr>
+    </table>
 </petclinic:layout>

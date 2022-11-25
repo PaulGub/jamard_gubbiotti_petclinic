@@ -34,6 +34,7 @@
                     <tr>
                         <th>Operation Date</th>
                         <th>Description</th>
+                        <th>Vet Name</th>
                     </tr>
                     </thead>
                     <c:forEach var="operation" items="${pet.operations}">
@@ -41,6 +42,7 @@
                             <td><petclinic:localDate date="${operation.date}"
                                                      pattern="yyyy-MM-dd"/></td>
                             <td><c:out value="${operation.description}"/></td>
+                            <td><c:out value="${operation.vet.firstName} ${operation.vet.lastName}"/></td>
                         </tr>
                     </c:forEach>
                 </table>
