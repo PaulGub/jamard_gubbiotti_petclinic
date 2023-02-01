@@ -1,4 +1,4 @@
-# Spring PetClinic Sample Application
+# LP DAWIN | Module JEE - TP n°1/2/3
 
 ### Projet réalisé par Théo Jamard et Paul Gubbiotti.
 
