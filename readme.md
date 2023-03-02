@@ -1,4 +1,4 @@
-# PetClinic
+# petclinic-java
 
 ### Projet réalisé lors de ma licence DAWIN (en équipe, Théo Jamard et Paul Gubbiotti)
 
